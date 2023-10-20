@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { RecaptchaProvider } from './src/context/recaptcha';
+import { OrgProvider } from './src/context/org';
+import { AuthProvider } from './src/context/auth';
+import { ClientProvider } from './src/context/client';
+import { PriceListProvider } from './src/context/priceList';
+import { ProductProvider } from './src/context/product';
+import ReCaptchar from './src/components/ReCaptchar';
+import MainNavigator from './src/navigation/MainNavigator';
 export default function App() {
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <RecaptchaProvider>
+      <AuthProvider>
+        <OrgProvider>
+          <ClientProvider>
+            <ProductProvider>
+              <PriceListProvider>
+                <NavigationContainer>
+                  <ReCaptchar />
+                  <MainNavigator />
+                </NavigationContainer>
+              </PriceListProvider>
+            </ProductProvider>
+          </ClientProvider>
+        </OrgProvider>
+      </AuthProvider>
+    </RecaptchaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
