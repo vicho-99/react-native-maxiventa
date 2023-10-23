@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ProductContext } from "../context/product";
 import errorHandling from "../utils/errorHandling";
 import productService from "../services/product";
+import { Alert } from "react-native";
 
 export default function useProduct() {
 
@@ -13,20 +14,35 @@ export default function useProduct() {
             setProducts(data)
         } catch (error) {
             const errorMessage = errorHandling(error);
-            console.log({ errorMessage })
+            Alert.alert(errorMessage)
+        }
+    }
+
+    async function searchProduct({ barCode, priceListId }) {
+
+        try {
+
+            const { data } = await productService.getProductsFromLecturePos({
+                barCode,
+                priceListId
+            });
+
+            return data;
+
+        } catch (error) {
+            throw errorHandling(error);
         }
     }
 
     useEffect(() => {
-
-
-        (async () => await listProducts())();
-
-
+        (async () =>
+            await listProducts()
+        )();
     }, [])
 
     return {
         products,
-        setProducts
+        setProducts,
+        searchProduct
     }
 }

@@ -16,7 +16,7 @@ export default function Select({
     return (
 
         <Dropdown
-            style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+            style={[styles.dropdown, isFocus && { borderColor: '#f59222' }]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             inputSearchStyle={styles.inputSearchStyle}
@@ -32,7 +32,8 @@ export default function Select({
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             onChange={item => {
-                setValue(item.value);
+             
+                setValue(item[valueField]);
                 setIsFocus(false);
             }}
 
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 0.5,
         borderRadius: 8,
+
         paddingHorizontal: 8,
     },
     icon: {

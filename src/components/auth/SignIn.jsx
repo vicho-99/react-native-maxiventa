@@ -1,12 +1,12 @@
 import { TouchableWithoutFeedback, View } from 'react-native';
-import { Button, Input } from '@rneui/themed';
-
+import { Button, Text, TextInput } from 'react-native-paper';
+import { Keyboard } from 'react-native';
 import useSignIn from '../../hooks/useSignIn'
 import Logo from '../Logo';
 import styles from '../../utils/styles';
-import { Keyboard } from 'react-native';
 import useOrg from '../../hooks/useOrg';
 import OrganizationListSelected from './OrganizationListSelected';
+import ChileanRutify from 'chilean-rutify'
 
 const SignIn = () => {
 
@@ -16,18 +16,17 @@ const SignIn = () => {
         setUsername,
         setPassword,
         handleSignIn,
-        signInStep
+        signInStep,
+        rutIsValid
     } = useSignIn();
 
     const { orgs } = useOrg();
 
     const handleScreenPress = () => Keyboard.dismiss();
 
-
     return (
 
         <TouchableWithoutFeedback onPress={handleScreenPress}>
-
 
             <View style={{ flex: 1 }}>
 
@@ -36,21 +35,28 @@ const SignIn = () => {
                     <View style={styles.containerSignIn}>
 
                         <View style={styles.containerLogo} >
-
                             <Logo
-                                width={255}
-                                height={30}
+                                width={325}
+                                height={70}
                             />
-
                         </View>
 
-                        <Input
+                        <TextInput
+                            mode='outlined'
+                            dense={true}
                             placeholder='Rut'
+                            style={styles.items}
+                            activeOutlineColor='#f59222'
+                            error={rutIsValid}
                             value={username}
-                            onChangeText={(text) => setUsername(text)}
+                            onChangeText={(text) => setUsername(ChileanRutify.formatRut(text))}
                         />
 
-                        <Input
+                        <TextInput
+                            mode='outlined'
+                            dense={true}
+                            activeOutlineColor='#f59222'
+                            style={styles.items}
                             placeholder='Contraseña'
                             secureTextEntry
                             value={password}
@@ -58,22 +64,25 @@ const SignIn = () => {
                         />
 
                         <Button
-
                             onPress={() => {
                                 handleScreenPress();
                                 handleSignIn({ orgId: null })
                             }}
+                            mode="contained"
+                            style={styles.items}
+                            buttonColor='#f59222'
+                        >
+                            Iniciar Sesión
+                        </Button>
 
-                            title="Iniciar Sesión"
-                            buttonStyle={styles.buttonSignIn.buttonStyle}
-                            containerStyle={styles.buttonSignIn.containerStyle}
-                        />
+                        <View style={styles.forgetPassword} >
+                            <Text variant="labelLarge">has olvidado tu contraseña ?</Text>
+                        </View>
+
                     </View>
-
                 }
 
                 {signInStep === 2 &&
-
                     <OrganizationListSelected
                         handleSignIn={handleSignIn}
                         orgs={orgs}

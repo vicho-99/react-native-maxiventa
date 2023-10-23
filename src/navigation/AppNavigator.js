@@ -19,11 +19,11 @@ const AppNavigator = () => {
                 component={HomeScreen}
             />
 
-            <Tab.Screen
+       {/*      <Tab.Screen
                 name="BusinessPartner"
                 options={ScreenOption.BusinessPartner}
                 component={BusinessPartnerScreen}
-            />
+            /> */}
 
             <Tab.Screen
                 name="Configuration"

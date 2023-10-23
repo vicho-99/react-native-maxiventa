@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import Select from "./DropBox";
+import Select from "./Select";
 
 export default function PosOption({
 

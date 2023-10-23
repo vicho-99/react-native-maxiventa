@@ -2,7 +2,7 @@ import api from './api'
 
 const priceListService = {
 
-    getPriceLists: async () => {
+    getAllPriceLists: async () => {
         return api.get("/priceList");
     },
 

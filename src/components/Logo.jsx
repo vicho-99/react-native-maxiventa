@@ -8,7 +8,7 @@ export default function Logo({
 
     return (
         <Image
-            source={require('../../assets/maxiventa.png')}
+            source={require('../../assets/smartyventa.png')}
             style={{ width, height }}
         />
 

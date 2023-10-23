@@ -6,9 +6,10 @@ import { RecaptchaContext } from "../context/recaptcha";
 import useOrg from "./useOrg";
 import { Alert } from "react-native";
 import valiteFormSignIn from "../utils/validations/valiteFormSignIn";
-import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useAuth from "./useAuth";
+import ChileanRutify from 'chilean-rutify'
+import { useEffect } from "react";
 
 export default function SignIn() {
 
@@ -23,12 +24,12 @@ export default function SignIn() {
 
     const { token, send } = RecaptchaContext();
 
+
     async function handleSignIn({ orgId }) {
 
         send()
 
         const timer = setTimeout(async () => {
-
 
             try {
 
@@ -68,12 +69,15 @@ export default function SignIn() {
 
     }
 
+    const rutIsValid = username.length > 0 ? !ChileanRutify.validRut(username) : false
+
     return {
         username,
         password,
         setUsername,
         setPassword,
         handleSignIn,
-        signInStep
+        signInStep,
+        rutIsValid
     }
 }

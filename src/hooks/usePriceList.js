@@ -9,36 +9,31 @@ const taxIncluded = {
     "Factura": 0,
 }
 
-const DEFAULT_PRICE_LIST_BY_DOCUMENT_TYPE = "Boleta";
+
 
 export default function usePriceList() {
 
     const { priceLists, setPriceLists } = PriceListContext();
-
     const [priceListsByDocumentType, setPriceListsByDocumentType] = useState([]);
 
     async function listPriceLists() {
         try {
-            const { data } = await priceListService.getPriceLists();
+            const { data } = await priceListService.getAllPriceLists();
             setPriceLists(data)
-
         } catch (error) {
             errorHandling(error)
         }
     }
 
     async function listPriceListsByDocumentType({ documentType }) {
-        console.log(taxIncluded[documentType])
-        setPriceListsByDocumentType(priceLists.filter(priceList => priceList.taxIncluded === taxIncluded[documentType]));
 
+        setPriceListsByDocumentType(priceLists.filter(priceList => priceList.taxIncluded === taxIncluded[documentType]));
     }
 
     useEffect(() => {
-
         (async () => {
             await listPriceLists()
         })();
-
     }, [])
 
     return {

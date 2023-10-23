@@ -7,9 +7,7 @@ export default function OrganizationListSelected({
 }) {
 
     return (
-
-        <View >
-
+        <View style={{ marginTop: 50}} >
             {orgs.map(org => (
                 <ListItem
                     onPress={async () => {
@@ -24,7 +22,6 @@ export default function OrganizationListSelected({
                     </ListItem.Content>
                 </ListItem>
             ))}
-
         </View>
     )
 }

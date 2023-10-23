@@ -1,10 +1,11 @@
-import React, { } from 'react';
+
 import { View } from 'react-native';
-
-import Select from '../components/DropBox';
-
+import Select from '../components/Select';
 import usePos from '../hooks/usePos';
-import { useState } from 'react';
+import { Button, IconButton } from 'react-native-paper';
+import CartItemsList from '../components/CartItemsList';
+import CartResumen from '../components/CartResumen';
+import styles from '../utils/styles';
 
 const HomeScreen = () => {
 
@@ -18,34 +19,40 @@ const HomeScreen = () => {
         client,
         setClient,
         documentTypes,
-        products
+        products,
+        cart,
+        product,
+        setProduct,
+        addItemToCart,
+        removeItemFromCart,
+        updateItemQtyFromCart,
+        totalAmountWithTaxes,
+        totalAmountWithoutTaxes
     } = usePos();
 
-    const [product, setProduct] = useState("");
-
     return (
-        <View style={{
-            flex: 1,
-            
-        }} >
 
-            <View  >
+        <View style={styles.homeSales} >
 
-                <View style={{
-                    flexDirection: 'row',
+            <View>
 
-                }}>
-                    <View style={{ flex: 1, padding: 5 }} >
+                <View style={styles.flexRow}>
+
+                    <View style={styles.flexPadding} >
 
                         <Select
                             name="Tipo documento"
+                            labelField={"label"}
+                            valueField={"value"}
                             data={documentTypes}
                             setValue={setDocumentType}
                             value={documentType}
                         />
+
                     </View>
 
-                    <View style={{ flex: 1, padding: 5 }} >
+                    <View style={styles.flexPadding} >
+
                         <Select
                             name="Lista de precio"
                             data={priceListsByDocumentType}
@@ -56,35 +63,76 @@ const HomeScreen = () => {
                         />
                     </View>
 
-
-
                 </View>
 
-                <View style={{ padding: 5 }} >
+                <View style={styles.paddingFive} >
+
                     <Select
                         name="Cliente"
                         data={clients}
                         setValue={setClient}
                         value={client}
                         labelField={"name"}
-                        valueField={"clientId"}
+                        valueField={"businessPartnerId"}
                     />
+
                 </View>
 
-                <View style={{ padding: 5 }} >
-                    <Select
-                        name="Producto"
-                        data={products}
-                        setValue={setProduct}
-                        value={product}
-                        labelField={"name"}
-                        valueField={"productId"}
-                    />
+                <View style={styles.paddingFive} >
+
+                    <View style={styles.boxSearchProduct} >
+
+                        <View style={styles.flexOne} >
+
+                            <Select
+
+                                name="Producto"
+                                data={products}
+                                setValue={setProduct}
+                                value={product}
+                                labelField={"name"}
+                                valueField={"barCode"}
+                            />
+                        </View>
+
+                        <IconButton
+                            icon="magnify"
+                            mode='contained'
+                            iconColor='black'
+                            containerColor='#fafafa'
+                            size={25}
+                            onPress={addItemToCart}
+                        />
+                    </View>
+
                 </View>
 
             </View>
 
+            <CartItemsList
+                updateItemQtyFromCart={updateItemQtyFromCart}
+                cart={cart}
+                removeItemFromCart={removeItemFromCart}
+            />
 
+            <View style={styles.orderDetail} >
+
+                <CartResumen
+                    documentType={documentType}
+                    totalAmountWithTaxes={totalAmountWithTaxes}
+                    totalAmountWithoutTaxes={totalAmountWithoutTaxes}
+                />
+
+                <View style={styles.orderBoxButton} >
+                    <Button
+                        style={styles.fullWidth}
+                        buttonColor='#f59222'
+                        mode="contained"
+
+                    >Finalizar venta</Button>
+                </View>
+
+            </View>
 
         </View>
     );

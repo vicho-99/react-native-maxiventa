@@ -8,6 +8,8 @@ import { PriceListProvider } from './src/context/priceList';
 import { ProductProvider } from './src/context/product';
 import ReCaptchar from './src/components/ReCaptchar';
 import MainNavigator from './src/navigation/MainNavigator';
+import { StatusBar } from 'react-native';
+import { CartProvider } from './src/context/cart';
 export default function App() {
 
 
@@ -17,12 +19,16 @@ export default function App() {
         <OrgProvider>
           <ClientProvider>
             <ProductProvider>
-              <PriceListProvider>
-                <NavigationContainer>
-                  <ReCaptchar />
-                  <MainNavigator />
-                </NavigationContainer>
-              </PriceListProvider>
+              <CartProvider>
+                <PriceListProvider>
+                  <NavigationContainer>
+                    <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
+
+                    <ReCaptchar />
+                    <MainNavigator />
+                  </NavigationContainer>
+                </PriceListProvider>
+              </CartProvider>
             </ProductProvider>
           </ClientProvider>
         </OrgProvider>
