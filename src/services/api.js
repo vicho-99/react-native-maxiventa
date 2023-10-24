@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const getCookieSession = async () => {
     const sessionData = await AsyncStorage.getItem('session');
+
     if (sessionData) {
         const session = JSON.parse(sessionData);
         return session.cookie;
@@ -23,7 +24,7 @@ instance.interceptors.request.use(async (config) => {
     const cookie = await getCookieSession();
 
     if (cookie) {
-     
+
         config.headers['Cookie'] = cookie;
     }
 

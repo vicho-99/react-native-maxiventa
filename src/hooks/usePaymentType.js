@@ -5,7 +5,9 @@ import paymentTypeService from "../services/paymentType";
 
 export default function usePaymentType() {
 
-    const [paymentsTypes, setPaymentsTypes] = useState();
+    const [paymentsTypes, setPaymentsTypes] = useState([]);
+
+    const [paymentType, setPaymentType] = useState(null);
 
     useEffect(() => {
 
@@ -21,7 +23,9 @@ export default function usePaymentType() {
 
     }, [])
 
-    return (
-        paymentsTypes
-    )
+    return {
+        paymentsTypes,
+        paymentType,
+        setPaymentType
+    }
 }

@@ -37,7 +37,7 @@ export default function CartResumen({
 
                     <Text variant="titleMedium">TOTAL:</Text>
 
-                    <Text variant="titleMedium">{formatToCurrency(documentType === "Boleta" ? totalAmountWithTaxes() : totalAmountWithoutTaxes())}</Text>
+                    <Text  variant="titleMedium">{formatToCurrency(documentType === "Boleta" ? totalAmountWithTaxes() : totalAmountWithoutTaxes())}</Text>
 
                 </View>
 

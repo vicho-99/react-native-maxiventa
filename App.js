@@ -10,29 +10,38 @@ import ReCaptchar from './src/components/ReCaptchar';
 import MainNavigator from './src/navigation/MainNavigator';
 import { StatusBar } from 'react-native';
 import { CartProvider } from './src/context/cart';
+import { Portal, Provider } from 'react-native-paper';
+
 export default function App() {
 
 
   return (
-    <RecaptchaProvider>
-      <AuthProvider>
-        <OrgProvider>
-          <ClientProvider>
-            <ProductProvider>
-              <CartProvider>
-                <PriceListProvider>
-                  <NavigationContainer>
-                    <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
 
-                    <ReCaptchar />
-                    <MainNavigator />
-                  </NavigationContainer>
-                </PriceListProvider>
-              </CartProvider>
-            </ProductProvider>
-          </ClientProvider>
-        </OrgProvider>
-      </AuthProvider>
-    </RecaptchaProvider>
+    <Provider>
+
+      <RecaptchaProvider>
+        <AuthProvider>
+          <OrgProvider>
+            <ClientProvider>
+              <ProductProvider>
+                <CartProvider>
+                  <PriceListProvider>
+                    <NavigationContainer>
+                      <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
+
+                      <ReCaptchar />
+
+                      <MainNavigator />
+
+                    </NavigationContainer>
+                  </PriceListProvider>
+                </CartProvider>
+              </ProductProvider>
+            </ClientProvider>
+          </OrgProvider>
+        </AuthProvider>
+      </RecaptchaProvider>
+
+    </Provider>
   );
 }

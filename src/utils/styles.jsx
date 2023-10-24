@@ -1,18 +1,68 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    cartListItem: {
+        flex: 1,
+        paddingVertical: 12,
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    cartListItemContent: {
+        flex: 1,
+        flexDirection: 'row',
+        gap: 16
+    },
+    cartListItemInfo: {
+        flex: 1,
+        flexDirection: 'column',
+        gap: 3
+    },
+    containerPayment: {
+        height: 450,
+        flexDirection: 'column',
+        columnGap: 3
+    },
+    paymentListItem: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    boxPaymentListItem: {
+        flexDirection: 'column',
+        paddingVertical: 6
+    },
+    boxPaymentList: {
+        flex: 1,
+        marginVertical: 12
+    },
+    boxResumenPayment: {
+        height: 150,
+        paddingTop: 16,
+        borderTopWidth: 0.3
+    },
+    boxInputButton: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+    },
     fullWidth: {
         width: '100%'
     },
     paddingFive: {
         padding: 5,
     },
-    homeSales: {
-        marginTop: '12%',
+    homeScreen: {
+
         flex: 1,
         padding: 10,
         justifyContent: 'space-between',
         flexDirection: 'column',
+        backgroundColor: 'white'
+    },
+    configScreen: {
+        flex: 1,
+        padding: 10,
+
         backgroundColor: 'white'
     },
     flexPadding: {
@@ -21,6 +71,7 @@ const styles = StyleSheet.create({
     },
     flexRow: {
         flexDirection: 'row',
+
     },
     flexOne: {
         flex: 1,
@@ -28,9 +79,9 @@ const styles = StyleSheet.create({
     containerCardList: {
         flex: 1,
         margin: 5,
-        borderRadius: 10,
         overflow: 'scroll',
         height: '100%',
+        borderTopWidth: 0.3,
     },
     cartInputEditQty: {
         height: 40,

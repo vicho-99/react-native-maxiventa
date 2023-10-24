@@ -6,6 +6,8 @@ import { Button, IconButton } from 'react-native-paper';
 import CartItemsList from '../components/CartItemsList';
 import CartResumen from '../components/CartResumen';
 import styles from '../utils/styles';
+import Dialog from '../components/Dialog';
+import Payment from '../components/Payment';
 
 const HomeScreen = () => {
 
@@ -27,19 +29,51 @@ const HomeScreen = () => {
         removeItemFromCart,
         updateItemQtyFromCart,
         totalAmountWithTaxes,
-        totalAmountWithoutTaxes
+        totalAmountWithoutTaxes,
+        paymentDialogVisible,
+        cancelPayment,
+        processPayment,
+        paymentsTypes,
+        addPaymentToPayments,
+        removePayment,
+        updatePaymentAmount,
+        payments,
+        paymentType,
+        setPaymentType,
+        totalPending,
+        TotalToPay,
+        processTransaction,
+        loading
     } = usePos();
 
     return (
 
-        <View style={styles.homeSales} >
+        <View style={styles.homeScreen} >
+
+            <Dialog name={"Pago"} visible={paymentDialogVisible}>
+
+                <Payment
+                    totalPending={totalPending}
+                    cancelPayment={cancelPayment}
+                    addPaymentToPayments={addPaymentToPayments}
+                    removePayment={removePayment}
+                    updatePaymentAmount={updatePaymentAmount}
+                    payments={payments}
+                    paymentsTypes={paymentsTypes}
+                    paymentType={paymentType}
+                    setPaymentType={setPaymentType}
+                    TotalToPay={TotalToPay}
+                    processTransaction={processTransaction}
+                    loading={loading}
+                />
+
+            </Dialog>
 
             <View>
 
                 <View style={styles.flexRow}>
 
                     <View style={styles.flexPadding} >
-
                         <Select
                             name="Tipo documento"
                             labelField={"label"}
@@ -48,11 +82,9 @@ const HomeScreen = () => {
                             setValue={setDocumentType}
                             value={documentType}
                         />
-
                     </View>
 
                     <View style={styles.flexPadding} >
-
                         <Select
                             name="Lista de precio"
                             data={priceListsByDocumentType}
@@ -66,27 +98,21 @@ const HomeScreen = () => {
                 </View>
 
                 <View style={styles.paddingFive} >
-
                     <Select
-                        name="Cliente"
+                        name="Seleccione cliente"
                         data={clients}
                         setValue={setClient}
                         value={client}
                         labelField={"name"}
                         valueField={"businessPartnerId"}
                     />
-
                 </View>
 
                 <View style={styles.paddingFive} >
-
                     <View style={styles.boxSearchProduct} >
-
                         <View style={styles.flexOne} >
-
                             <Select
-
-                                name="Producto"
+                                name="Seleccione producto"
                                 data={products}
                                 setValue={setProduct}
                                 value={product}
@@ -96,17 +122,17 @@ const HomeScreen = () => {
                         </View>
 
                         <IconButton
-                            icon="magnify"
+                            icon="plus"
                             mode='contained'
-                            iconColor='black'
-                            containerColor='#fafafa'
-                            size={25}
+                            style={{ borderRadius: 6 }}
+                            iconColor='#212121'
+                            containerColor='white'
+                            size={24}
                             onPress={addItemToCart}
                         />
+
                     </View>
-
                 </View>
-
             </View>
 
             <CartItemsList
@@ -128,13 +154,15 @@ const HomeScreen = () => {
                         style={styles.fullWidth}
                         buttonColor='#f59222'
                         mode="contained"
-
-                    >Finalizar venta</Button>
+                        onPress={processPayment}
+                    >Finalizar venta
+                    </Button>
                 </View>
 
             </View>
 
         </View>
+
     );
 };
 

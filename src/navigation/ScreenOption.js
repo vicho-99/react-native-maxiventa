@@ -1,5 +1,18 @@
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { Image } from 'react-native';
+
+let generic = {
+    tabBarActiveTintColor: '#f59222',
+    headerTitle: (props) => <Image
+        style={{ width: 130, height: 25 }}
+        source={require('../../assets/s.png')}
+    />,
+    headerStyle: {
+        backgroundColor: '#f59222',
+    },
+    tabBarInactiveTintColor: 'gray',
+}
 
 const ScreenOption = {
     "Login": {
@@ -11,13 +24,12 @@ const ScreenOption = {
         }
     },
     "Home": {
-        headerLeft: () => null,
         title: 'Venta',
-
+        ...generic,
         tabBarIcon: ({ focused, color, size }) => {
-            return <Feather name="shopping-bag" size={size} color={"#f59222"} />
+            return <Feather name="shopping-bag" size={size} color={focused ? "#f59222" : "#434b4d"} />
         },
-        headerShown: false,
+
     },
     "BusinessPartner": {
         headerLeft: () => null,
@@ -28,13 +40,12 @@ const ScreenOption = {
         }
     },
     "Configuration": {
-        headerLeft: () => null,
-        title: 'Configuración',
 
-        tabBarIcon: ({ facused, color, size }) => {
-            return <AntDesign name="setting" size={size} color={"#f59222"} />
+        title: 'Configuración',
+        ...generic,
+        tabBarIcon: ({ focused, color, size }) => {
+            return <AntDesign name="setting" size={size} color={focused ? "#f59222" : "#434b4d"} />
         },
-        headerShown: false,
     }
 }
 

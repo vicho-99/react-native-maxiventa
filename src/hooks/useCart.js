@@ -64,6 +64,8 @@ export default function useCart() {
         updateItemQty,
         totalAmountWithTaxes,
         totalAmountWithoutTaxes,
-        emply
+        emply,
+        totalLines,
+        totalItems
     }
 }

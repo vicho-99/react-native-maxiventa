@@ -1,9 +1,9 @@
-import { ScrollView } from "react-native";
-import { List, TextInput } from "react-native-paper";
+import { ScrollView, View } from "react-native";
+import { Text } from "react-native-paper";
 import DeleteIconButton from "./DeleteIconButton";
-import styles from "../utils/styles";
 import formatToCurrency from "../utils/formatToCurrency";
 import InputEditCartQty from "./InputEditCartQty";
+import styles from "../utils/styles";
 
 export default function CartItemsList({
     cart,
@@ -14,26 +14,33 @@ export default function CartItemsList({
         <ScrollView style={styles.containerCardList} >
 
             {cart.map(item => (
-                <List.Item
-                    key={item.barCode + item.productId}
-                    title={item.name}
-                    description={"Precio: " + formatToCurrency(item.price)}
 
-                    right={() =>
-                        <DeleteIconButton
-                            itemKey={item.barCode}
-                            removeItemFromCart={removeItemFromCart}
-                            size={16}
-                        />}
-                    left={() =>
+                <View key={item.barCode + "-" + item.productId} style={styles.cartListItem} >
+
+                    <View style={styles.cartListItemContent} >
+
                         <InputEditCartQty
                             maxQty={parseFloat(item.stock)}
                             qty={item.amount}
                             itemKey={item.barCode}
                             updateItemQtyFromCart={updateItemQtyFromCart}
                         />
-                    }
-                />
+
+                        <View style={styles.cartListItemInfo} >
+                            <Text variant="labelLarge">{item.name}</Text>
+                            <Text style={{ fontWeight: 400 }} variant="labelLarge">Precio: {formatToCurrency(item.price)}</Text>
+                        </View>
+
+                    </View>
+
+                    <DeleteIconButton
+                        itemKey={item.barCode}
+                        removeFunction={removeItemFromCart}
+                        size={18}
+                    />
+
+                </View>
+
             ))}
 
 

@@ -3,15 +3,15 @@ import { IconButton } from "react-native-paper";
 
 export default function DeleteIconButton({
     size,
-    removeItemFromCart,
+    removeFunction,
     itemKey
 }) {
     return (
         <IconButton
             icon="delete-outline"
             size={size}
-            iconColor='red'
-            containerColor='#ffebee'
+            iconColor='#f44336'
+           
             onPress={() => {
                 Alert.alert('Eliminación', 'Seguro desea eliminar el item seleccionado?', [
                     {
@@ -20,7 +20,7 @@ export default function DeleteIconButton({
                     },
                     {
                         text: 'OK',
-                        onPress: () => removeItemFromCart(itemKey)
+                        onPress: () => removeFunction(itemKey)
                     },
                 ]);
 
