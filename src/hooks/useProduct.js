@@ -3,6 +3,7 @@ import { ProductContext } from "../context/product";
 import errorHandling from "../utils/errorHandling";
 import productService from "../services/product";
 import { Alert } from "react-native";
+import mappendResponse from "../utils/mappendResponse";
 
 export default function useProduct() {
 
@@ -11,7 +12,7 @@ export default function useProduct() {
     async function listProducts() {
         try {
             const { data } = await productService.getProductsWithStock();
-            setProducts(data)
+            setProducts(await mappendResponse.product(data))
         } catch (error) {
             const errorMessage = errorHandling(error);
             Alert.alert(errorMessage)

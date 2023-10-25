@@ -137,28 +137,18 @@ export default function usePos() {
     }
 
     async function processTransaction() {
-
         try {
-
             showLoading();
-
             await validateProcessTransaction({ payments, totalPending });
-
             const data = await mappendRequest.saleFromPos({ client, documentType, priceList, cart, payments, totalPending })
-
             let response = await documentService.createSale(data)
-
             await clearInputs();
-
             hideLoading();
-
             Alert.alert(response.data.message)
-
         } catch (error) {
             hideLoading();
             const errorMessage = errorHandling(error)
             Alert.alert(errorMessage);
-
         }
     }
 

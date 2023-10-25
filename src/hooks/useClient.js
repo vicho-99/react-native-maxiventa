@@ -3,6 +3,7 @@ import { ClientContext } from "../context/client"
 import clientService from "../services/client";
 import errorHandling from "../utils/errorHandling";
 import { Alert } from "react-native";
+import mappendResponse from "../utils/mappendResponse";
 
 let initProps = {
     name: '',
@@ -30,7 +31,7 @@ export default function useClient() {
     async function listClients() {
         try {
             const { data } = await clientService.getAllClients();
-            setClients(data);
+            setClients(await mappendResponse.client(data));
         } catch (error) {
             let errorMessage = errorHandling(error);
             console.log({ errorMessage })
